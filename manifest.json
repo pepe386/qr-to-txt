@@ -1,6 +1,6 @@
 {
-  "short_name": "Ionic App",
-  "name": "My Ionic App",
+  "short_name": "QR to txt",
+  "name": "QR to txt",
   "icons": [
     {
       "src": "assets/icon/favicon.png",
