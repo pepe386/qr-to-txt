@@ -1,0 +1,7 @@
+{
+  "name": "qr-to-txt",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
