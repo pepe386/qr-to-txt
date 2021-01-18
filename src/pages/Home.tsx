@@ -5,10 +5,9 @@ import {
 } from '@ionic/react';
 import { set, get } from '../utils/Storage';
 import { qrCodeOutline, close, trashOutline } from 'ionicons/icons';
-
 import './Home.css';
-
 import QrReader from 'react-qr-reader'
+
 
 const Home: React.FC = () => {
 
@@ -164,9 +163,6 @@ const Home: React.FC = () => {
           >
           </IonActionSheet>
         )}
-
-
-
 
       </IonContent>
     </IonPage>
