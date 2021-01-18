@@ -114,23 +114,22 @@ const Home: React.FC = () => {
         )}
 
         {scanResult.data.length > 0 && (
-          <IonCard>
-            <IonCardHeader>
-              <IonCardTitle>QR Codes</IonCardTitle>
-            </IonCardHeader>
-            {scanResult.data.map((result: any, index: number) => {
-              return (
-                <IonCardContent key={index}>
-                  { result}
+          scanResult.data.map((result: any, index: number) => {
+            return (
+              <IonCard key={index} href={result} >
+                <IonCardHeader>
+                  <IonCardTitle>QR text</IonCardTitle>
+                </IonCardHeader>
+                <IonCardContent>
+                  {result}
                 </IonCardContent>
-              )
-            })}
-          </IonCard>
-        )}
+              </IonCard>
+            )
+          }))}
 
         {scanResult.data.length > 0 && (
           <div>
-            <textarea id="dataToDownload" value={dataToTxt} style={{color: "black"}} onChange={stopScan} hidden/>
+            <textarea id="dataToDownload" value={dataToTxt} style={{ color: "black" }} onChange={stopScan} hidden />
             <IonButton expand="full" color="success" onClick={downloadTxtFile}>Download txt file</IonButton>
             <IonButton onClick={() => setShowActionSheet(true)} color="warning" expand="full">
               <IonIcon slot="start" icon={trashOutline}></IonIcon>
