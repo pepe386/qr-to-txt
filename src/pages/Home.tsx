@@ -38,13 +38,17 @@ const Home: React.FC = () => {
   }
 
   const downloadTxtFile = () => {
-    const element = document.createElement("a");
+    /*const element = document.createElement("a");
     const input: any = document.getElementById('dataToDownload');
     const file: any = new Blob([input.value], { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
     element.download = "data.txt";
     document.body.appendChild(element);
-    element.click();
+    element.click();*/
+    const input: any = document.getElementById('dataToDownload');
+    var FileSaver = require('file-saver');
+    var blob = new Blob([input.value], { type: "text/plain;charset=utf-8" });
+    FileSaver.saveAs(blob, "data.txt");
   }
 
   async function startScan() {
@@ -76,6 +80,20 @@ const Home: React.FC = () => {
   const stopScan = () => {
     updateScan(false);
   }
+
+  function copy(index: number) {
+    let boxId = "box-" + index;
+    let tooltipId = "custom-tooltip" + index;
+    const Url: any = document.getElementById(boxId);
+    Url.focus();
+    Url.select();
+    document.execCommand("copy");
+    const customTooltip: any = document.getElementById(tooltipId);
+    customTooltip.style.display = "table";
+    setTimeout(function () {
+      customTooltip.style.display = "none";
+    }, 1000);
+  };
 
   return (
     <IonPage>
@@ -115,13 +133,17 @@ const Home: React.FC = () => {
 
         {scanResult.data.length > 0 && (
           scanResult.data.map((result: any, index: number) => {
+            let boxId = "box-" + index;
+            let tooltipId = "custom-tooltip" + index;
             return (
-              <IonCard key={index} href={result} >
+              <IonCard key={index} onClick={() => copy(index)} >
                 <IonCardHeader>
                   <IonCardTitle>QR text</IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent>
                   {result}
+                  <span id={tooltipId} className="custom-tooltip">copied!</span>
+                  <textarea className="visuallyhidden" id={boxId} value={result} readOnly></textarea>
                 </IonCardContent>
               </IonCard>
             )
@@ -129,7 +151,7 @@ const Home: React.FC = () => {
 
         {scanResult.data.length > 0 && (
           <div>
-            <textarea id="dataToDownload" value={dataToTxt} style={{ color: "black" }} onChange={stopScan} hidden />
+            <textarea id="dataToDownload" value={dataToTxt} style={{ color: "black" }} readOnly hidden />
             <IonButton expand="full" color="success" onClick={downloadTxtFile}>Download txt file</IonButton>
             <IonButton onClick={() => setShowActionSheet(true)} color="warning" expand="full">
               <IonIcon slot="start" icon={trashOutline}></IonIcon>

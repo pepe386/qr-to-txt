@@ -1,0 +1,8 @@
+.visuallyhidden{position:absolute;clip:rect(1px,1px,1px,1px)}
+.custom-tooltip {
+    display: none;
+    padding: 5px 10px;
+    background-color: #000000df;
+    border-radius: 4px;
+    color: #fff;
+}
